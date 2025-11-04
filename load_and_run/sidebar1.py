@@ -38,3 +38,13 @@ def render():
         bucket_name = st.text_input("bucket_name")
         prefix = st.text_input("prefix")
         gcs_inference_filename = st.text_input("gcs_inference_filename")
+
+    if st.button("Load Data"):
+        from services import data_loader_service
+        st.session_state.inference_data = data_loader_service.load_data()
+        st.success("Data loaded successfully!")
+
+    if st.button("Run Eval", disabled='inference_data' not in st.session_state):
+        from services import eval_analysis_service
+        st.session_state.eval_results = eval_analysis_service.load_data()
+        st.success("Evaluation completed successfully!")

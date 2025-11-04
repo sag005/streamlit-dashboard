@@ -1,13 +1,19 @@
 import streamlit as st
 from services import data_loader_service
 
+
 def load_css(file_path):
     with open(file_path) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
 def render():
-    data = data_loader_service.load_data()
+    # Check if data is loaded
+    if 'inference_data' not in st.session_state:
+        st.info("Please load data from the sidebar to view results.")
+        return
+
+    data = st.session_state.inference_data
 
     # Load CSS
     load_css("assets/styles.css")

@@ -8,10 +8,15 @@ def load_css(file_path):
 
 
 def render():
+    # Check if eval results are loaded
+    if 'eval_results' not in st.session_state:
+        st.info("Please run evaluation from the sidebar to view results.")
+        return
+
     st.header("Eval Analysis")
     load_css("assets/styles.css")
 
-    data = eval_analysis_service.load_data()
+    data = st.session_state.eval_results
 
     # Initialize session state
     if 'case_idx' not in st.session_state:
@@ -97,20 +102,20 @@ def render():
 
     case = data['case_eval_results'][st.session_state.case_idx]
 
-    # Split into left (eval cards) and right (portfolio info)
-    left_bottom, right_bottom = st.columns([2, 1])
+    # Toggle between evaluation sources
+    eval_source = st.radio("Evaluation Source", ["Vertex AI", "DeepEval"], horizontal=True, key="eval_toggle")
+    st.session_state.eval_source = "vertex_ai" if eval_source == "Vertex AI" else "deepeval"
+
+    # Split into left (eval cards) 60% and right (summary) 40%
+    left_bottom, right_bottom = st.columns([3, 2])
 
     with left_bottom:
-        # Toggle between evaluation sources
-        eval_source = st.radio("Evaluation Source", ["Vertex AI", "DeepEval"], horizontal=True, key="eval_toggle")
-        st.session_state.eval_source = "vertex_ai" if eval_source == "Vertex AI" else "deepeval"
-
         # Get the appropriate eval results
         eval_results = case.vertex_ai_eval_results if st.session_state.eval_source == "vertex_ai" else case.deepeval_results
 
-        # Display 7 cards in 3x3 grid (3 cols per row)
-        for i in range(0, len(eval_results), 3):
-            cols = st.columns(3)
+        # Display cards in 2x4 grid (2 cols per row)
+        for i in range(0, len(eval_results), 2):
+            cols = st.columns(2)
             for j, col in enumerate(cols):
                 if i + j < len(eval_results):
                     eval_result = eval_results[i + j]
@@ -134,14 +139,11 @@ def render():
     with right_bottom:
         st.markdown(f"""
             <div class="eval-card">
-                <div class="card-name">Portfolio ID</div>
-                <div class="card-value">{case.portfolio_id}</div>
-            </div>
-        """, unsafe_allow_html=True)
-
-        st.markdown(f"""
-            <div class="eval-card">
-                <div class="card-name">Summary</div>
+                <div class="card-row">
+                    <div class="card-label">Portfolio ID</div>
+                    <div style="color: #fff; font-size: clamp(0.9rem, 2cqw, 1.1rem);">{case.portfolio_id}</div>
+                </div>
+                <div class="card-name" style="margin-top: 20px;">Summary</div>
                 <div style="color: #ccc; font-size: 0.9rem; line-height: 1.5;">{case.summary}</div>
             </div>
         """, unsafe_allow_html=True)
