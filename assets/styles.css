@@ -1,0 +1,166 @@
+.eval-card {
+    background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.eval-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.card-id {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #aaa;
+}
+
+.card-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 16px;
+}
+
+.card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+}
+
+.card-date {
+    color: #999;
+    font-size: 0.95rem;
+}
+
+.card-status {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.card-status-fail {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.eval-card-small {
+    background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 10px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.eval-card-small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.eval-card-small .card-name {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.eval-card-small .card-row {
+    margin: 6px 0;
+}
+
+.eval-card-small .card-label {
+    font-size: 0.85rem;
+}
+
+.eval-card-small .card-value {
+    font-size: 1rem;
+}
+
+.card-label {
+    color: #999;
+    font-size: 0.95rem;
+}
+
+.card-value {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.holdings-table {
+    background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.holdings-header {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1.5fr;
+    padding: 12px 16px;
+    color: #999;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-bottom: 1px solid #444;
+    margin-bottom: 8px;
+}
+
+.holdings-row {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1.5fr;
+    padding: 16px;
+    align-items: center;
+    border-radius: 12px;
+    transition: background 0.2s ease;
+}
+
+.holdings-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.holdings-asset {
+    display: flex;
+    align-items: center;
+}
+
+.holdings-name {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.holdings-price {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.holdings-amount {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.holdings-positive {
+    color: #4caf50;
+}
+
+.holdings-negative {
+    color: #f44336;
+}
