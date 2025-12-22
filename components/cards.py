@@ -5,7 +5,6 @@ import pandas as pd
 def data_card(df: pd.DataFrame, unit: str = "L"):
     """
     Display a summary data card with all 5 metrics.
-    Shows each metric's total in a single card.
 
     Args:
         df: Time-series DataFrame with metric values
@@ -20,41 +19,35 @@ def data_card(df: pd.DataFrame, unit: str = "L"):
 
     # Create card with border
     with st.container(border=True):
-        # Title
-        st.markdown(
-            "<div style='text-align: center; color: #9CA3AF; font-size: 16px; margin-bottom: 20px;'>"
-            "Total Consumption"
-            "</div>",
-            unsafe_allow_html=True
-        )
+        st.write("**Total Consumption**")
 
-        # Display each metric in the card
+        # Display each metric
         for metric_name, total_value in metric_totals.items():
             col1, col2 = st.columns([3, 1])
-
             with col1:
-                st.markdown(f"<div style='font-size: 16px;'>{metric_name}</div>",
-                            unsafe_allow_html=True)
-
+                st.write(metric_name)
             with col2:
-                st.markdown(
-                    f"<div style='text-align: right; font-size: 16px; font-weight: 500;'>{int(total_value)} {unit}</div>",
-                    unsafe_allow_html=True)
+                st.write(f"{int(total_value)} {unit}")
 
 
-def placeholder_chart():
+def metric_summary_card(metric_name: str, success_pct: float, fail_pct: float, error_pct: float):
     """
-    Display a placeholder container for charts.
-    Used during layout development before actual charts are added.
+    Display a metric summary card with success/fail/error percentages (VERTICAL LAYOUT).
+    Used in dashboard top section.
+
+    Args:
+        metric_name: Name of the metric
+        success_pct: Success percentage (0-100)
+        fail_pct: Fail percentage (0-100)
+        error_pct: Error percentage (0-100)
     """
     with st.container(border=True):
-        st.markdown(
-            "<div style='display: flex; align-items: center; justify-content: center; height: 300px; color: #CCC;'>"
-            "<div style='text-align: center;'>"
-            "<p style='font-size: 48px; margin: 0;'>📈</p>"
-            "<p style='margin: 10px 0 0 0; color: #999;'>Chart placeholder</p>"
-            "<p style='font-size: 12px; margin: 5px 0 0 0; color: #CCC;'>Built in PR 4</p>"
-            "</div>"
-            "</div>",
-            unsafe_allow_html=True
-        )
+        # Header with metric name
+        st.write(f"**{metric_name}**")
+
+        st.divider()
+
+        # Display percentages VERTICALLY (stacked)
+        st.markdown(f"✅ **Success** {success_pct:.1f}%")
+        st.markdown(f"❌ **Fail** {fail_pct:.1f}%")
+        st.markdown(f"⚠️ **Error** {error_pct:.1f}%")
